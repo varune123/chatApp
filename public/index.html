@@ -3,7 +3,47 @@
 <head>
 <script type="text/javascript" src = "clientside-require/dist/bundle.js"></script>
 
+<style>
+    h2{
+        color:#a71930;
+    }
+    .deleteButton{
+        background-color: #a71930;;
+    }
+    #messages{
+       
+        align-items: center;
 
+        width:85%;
+        margin: 2px;
+        padding: 0px;
+        box-sizing: content-box;
+
+        background-color: #4a708b;
+        border-radius: 2px;
+        position: relative;
+        color: white;
+
+        font-size: 16px;
+    }
+    .chatArea{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    form{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    body{
+        text-align: center;
+        background-color: #00395d;
+    }
+
+</style>
 </head>
 
 
@@ -12,7 +52,10 @@
 
 <script src="/__/firebase/7.14.3/firebase-app.js"></script>
 <script src="/__/firebase/7.14.3/firebase-database.js"></script>
-
+<header>
+        <h2>Rocket Chat<h2>
+        <button onclick="id=changeUsername(userId)" style="position:absolute;right:0px;top:0px;">Change Username</button>
+</header>
 <script>
 
   //web app's Firebase configuration
@@ -39,6 +82,7 @@
       message: message
   };
   
+  
   function finished(error){
       if(error){
           console.log("data not saved");
@@ -47,12 +91,12 @@
       }
   }
 
+
   function sendMessage() {
   // get message
-  if(myName==="undefined"){
-      myName=prompt("Enter your name first");
-  }
-  message = document.getElementById("message").value;
+  var time= new Date().toLocaleTimeString();
+  time=`<i><span style="font-size:10px;position:absolute;right:0px;">${time}</span></i>`
+  message = document.getElementById("message").value + time;
 
   // save in database
   firebase.database().ref("messages").push().set({
@@ -71,7 +115,7 @@
   html += "<li id='message-" + snapshot.key + "'>";
    // show delete button if message is sent by me
   if (snapshot.val().name == myName) {
-   html += "<button data-id='" + snapshot.key + "' onclick='deleteMessage(this);'>";
+   html += "<button class='deleteButton' data-id='" + snapshot.key + "' onclick='deleteMessage(this);' style='position:static;'>";
     html += "Delete";
    html += "</button>";
   }
@@ -80,6 +124,8 @@
 
   document.getElementById("messages").innerHTML += html;
  });
+
+
  function deleteMessage(self) {
  // get message ID
  var messageId = self.getAttribute("data-id");
@@ -94,8 +140,13 @@ firebase.database().ref("messages").on("child_removed", function (snapshot) {
  document.getElementById("message-" + snapshot.key).innerHTML = "This message has been removed";
 });
 </script>
+
+
 <!-- list -->
-<ul id="messages"></ul>
+<div class="chatArea">
+<ul id="messages" style="font-size:19px;text-align:left;"></ul>
+</div>
+
 
 <!-- form to send message -->
 <form onsubmit="return sendMessage();">
@@ -103,5 +154,7 @@ firebase.database().ref("messages").on("child_removed", function (snapshot) {
 
  <input type="submit">
 </form>
+
+
 </body>
 </html>
