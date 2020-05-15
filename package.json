@@ -1,0 +1,31 @@
+{
+  "name": "chatapp",
+  "version": "1.0.0",
+  "description": "[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/varune123/chatApp)",
+  "main": "index.js",
+  "dependencies": {
+    "browserify": "^16.5.1",
+    "clientside-require": "^4.7.2",
+    "firebase": "^7.14.3",
+    "firebase-tools": "^8.2.0",
+    "latest-version": "^5.1.0",
+    "node": "^14.2.0",
+    "nodejs": "0.0.0",
+    "requirejs": "^2.3.6",
+    "tools": "^0.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/varune123/chatApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/varune123/chatApp/issues"
+  },
+  "homepage": "https://github.com/varune123/chatApp#readme"
+}

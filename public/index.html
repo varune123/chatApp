@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src = "clientside-require/dist/bundle.js"></script>
+
+
+</head>
+
+
+
+<body>
+
+<script src="/__/firebase/7.14.3/firebase-app.js"></script>
+<script src="/__/firebase/7.14.3/firebase-database.js"></script>
+
+<script>
+
+  //web app's Firebase configuration
+  var config = {
+    apiKey: "AIzaSyCUKm3hO1LYem5AifkYNSSRCdvq22Dg1fw",
+    authDomain: "chatapp-33234.firebaseapp.com",
+    databaseURL: "https://chatapp-33234.firebaseio.com/",
+    projectId: "chatapp-33234",
+    storageBucket: "chatapp-33234.appspot.com",
+    messagingSenderId: "380882548955",
+    appId: "1:380882548955:web:8cc29a9a5943ca6324f4fe"
+  };
+  
+  // Initialize Firebase
+  firebase.initializeApp(config);
+  
+  var database= firebase.database();
+  var messages= database.ref('messages');
+  var myName = prompt("Enter your name");
+  var message;
+ 
+  var data={
+      name: myName,
+      message: message
+  };
+  
+  function finished(error){
+      if(error){
+          console.log("data not saved");
+      }else{
+          console.log("data saved");
+      }
+  }
+
+  function sendMessage() {
+  // get message
+  if(myName==="undefined"){
+      myName=prompt("Enter your name first");
+  }
+  message = document.getElementById("message").value;
+
+  // save in database
+  firebase.database().ref("messages").push().set({
+   name: myName,
+   message: message
+  });
+  document.getElementById("message").value="";
+  // prevent form from submitting
+  return false;
+ }
+
+ // listen for incoming messages
+ firebase.database().ref("messages").on("child_added", function (snapshot) {
+  var html = "";
+  //each message's unique ID
+  html += "<li id='message-" + snapshot.key + "'>";
+   // show delete button if message is sent by me
+  if (snapshot.val().name == myName) {
+   html += "<button data-id='" + snapshot.key + "' onclick='deleteMessage(this);'>";
+    html += "Delete";
+   html += "</button>";
+  }
+  html += snapshot.val().name + ": " + snapshot.val().message;
+  html += "</li>";
+
+  document.getElementById("messages").innerHTML += html;
+ });
+ function deleteMessage(self) {
+ // get message ID
+ var messageId = self.getAttribute("data-id");
+
+ // delete message
+ firebase.database().ref("messages").child(messageId).remove();
+}
+
+// attach listener for delete message
+firebase.database().ref("messages").on("child_removed", function (snapshot) {
+ // remove message node
+ document.getElementById("message-" + snapshot.key).innerHTML = "This message has been removed";
+});
+</script>
+<!-- list -->
+<ul id="messages"></ul>
+
+<!-- form to send message -->
+<form onsubmit="return sendMessage();">
+ <input id="message" placeholder="Enter message" autocomplete="off">
+
+ <input type="submit">
+</form>
+</body>
+</html>
