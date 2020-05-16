@@ -6,7 +6,7 @@
   "dependencies": {
     "browserify": "^16.5.1",
     "clientside-require": "^4.7.2",
-    "firebase": "^7.14.3",
+    "firebase": "^7.14.4",
     "firebase-tools": "^8.2.0",
     "latest-version": "^5.1.0",
     "node": "^14.2.0",

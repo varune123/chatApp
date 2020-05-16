@@ -1,36 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src = "clientside-require/dist/bundle.js"></script>
 
+<title>Rocket Chat App</title>
 <style>
+    li{
+        display: block;
+        border-radius: 10px;
+        padding: top 10px;
+        padding: right 15px;
+        padding: bottom 10px;
+        padding: left 15px;
+        margin: top 10px;
+        margin: bottom 10px;
+        list-style: none;
+        text-align: justify;
+        background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgNBwgHBw8HBwcHBwoHBwcHBw8ICQcKFR0iFiAdHxMYHCwsGBooGx8fIT0hMTE3Ljo6Fys/OD84NzQtNTEBCgoKDg0NDg0NDjMZFRkrKysrLSsyMSsrKysrNzctKzcrKysrNystKy0tLTcrKzcrKzcrNzcrKy0rKys3KysuK//AABEIAKgBLAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAACAQAHA//EACEQAQEBAAIBBAMBAAAAAAAAAAEAEQISIQMicZExQfAj/8QAGAEBAQEBAQAAAAAAAAAAAAAAAQADBAX/xAAXEQEBAQEAAAAAAAAAAAAAAAAAEWEB/9oADAMBAAIRAxEAPwDoaxWKxWxe6SxWKxWiSxWixWiqxWK0WCq0WKxWkSxWKxWCqxWixWiSxWKxWkSxWiwWCSxWKxWiSxWixWkqxWixWCq0WKxWiSxWKxWiSxWKxWCSxWKxWkSxWK0WCqxWK0WirypsVjtJ0RYrFYrbOQlisVisIlitFitFVisVisElitFitFVitFitJVosVisElisVitElisVitIlisVisElitFitFVitFitFVitFisIlisVitElgtFitElisVisElisVotJVisVisEljsVptF0NaLFYrbOMlisVisElisVitIlisVitElitFisFVitFgtElitFitJVosVisElisVitElisVitIlisVosFVisVitElisVotFVitFisFVitFitIlisVisElisVitElisVitIljtFjtF0NYrRYrauNVosVitElisVitElisVisIlisVitElitFgsElitFitIlisVitElgtFisElisVitElisVitElisVisElisVotJVitFisFVitFitFVosVitIlisVitElisVisEljsVptJ0NYrRYrbORVosVisIlgtFitFVosVisElisVitIlisVitElisVotFVitFisFVitFitFVitFisIlisVitElisVisElisVitIlitFitFVitFitFVosVisElgtFitJVosVisEljsVptF0NYrFaLbONVitFisFVitFitIlisVitElisVitElisVisElisVitElisVosJVisVotFVitFitElisVisJVitFitElisVitElitFgsIlisVitElitFisFVitFitFVosVitIljsVjtF0RYrFaLauNVitFitFVisVotFVitFisElisVitJVitFisElisVitElitFitJVisVisElitFitFVitFitFVosVisIlisVitElisVitElisVisIlitFitFVitFgtElitFisEljsVjtJ0RYrFYrbOQlisVosJVisVitElitFisFVitFitFVitFitIlisVisElisVitElisVitIlitFisFVitFgtElitFitFVosVisIlisVitElisVitElisVosJVitFgtElisVotFVpsVjsJ0RYrFYrbOQlisVitElisVisElitFitJVitFisFVitFitFVosVitIlisVisElisVitElisVitIlitFgsElitFitElisVitElgtFisIlisVitElisVitElisVisIlisVotFVpsVjsF0NaLFYrbOQlisVitIlisVisElisVitElitFgtIlitFitFVosVisElgtFitJVosVisElisVotFVisVitElisVosJVitFitFVitFitFVitFisIlisVitElisVisElisVitIljsVptF0NaLa1s5BWC2tCFaLa1EVitrURWK1tCB5RW1qIrFa2ogsVtaCK0W1qQrFaWoosVtaCKxW1qQrFbWgisVtaiKxWtqQrFbWggteHV3v48e0eXUX5tajE/y66vN5efaePj9f215HoGnbkpuPE3s/Xza1UTQz0cd5cnD8HjX6vL1Ovb2K8f1v5tajzmv/9k=");
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
     h2{
         color:#a71930;
+        background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgNBwgHBw8HBwcHBwoHBwcHBw8ICQcKFR0iFiAdHxMYHCwsGBooGx8fIT0hMTE3Ljo6Fys/OD84NzQtNTEBCgoKDg0NDg0NDjMZFRkrKysrLSsyMSsrKysrNzctKzcrKysrNystKy0tLTcrKzcrKzcrNzcrKy0rKys3KysuK//AABEIAKgBLAMBIgACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAACAQAHA//EACEQAQEBAAIBBAMBAAAAAAAAAAEAEQISIQMicZExQfAj/8QAGAEBAQEBAQAAAAAAAAAAAAAAAQADBAX/xAAXEQEBAQEAAAAAAAAAAAAAAAAAEWEB/9oADAMBAAIRAxEAPwDoaxWKxWxe6SxWKxWiSxWixWiqxWK0WCq0WKxWkSxWKxWCqxWixWiSxWKxWkSxWiwWCSxWKxWiSxWixWkqxWixWCq0WKxWiSxWKxWiSxWKxWCSxWKxWkSxWK0WCqxWK0WirypsVjtJ0RYrFYrbOQlisVisIlitFitFVisVisElitFitFVitFitJVosVisElisVitElisVitIlisVisElitFitFVitFitFVitFisIlisVitElgtFitElisVisElisVotJVisVisEljsVptF0NaLFYrbOMlisVisElisVitIlisVitElitFisFVitFgtElitFitJVosVisElisVitElisVitIlisVosFVisVitElisVotFVitFisFVitFitIlisVisElisVitElisVitIljtFjtF0NYrRYrauNVosVitElisVitElisVisIlisVitElitFgsElitFitIlisVitElgtFisElisVitElisVitElisVisElisVotJVitFisFVitFitFVosVitIlisVitElisVisEljsVptJ0NYrRYrbORVosVisIlgtFitFVosVisElisVitIlisVitElisVotFVitFisFVitFitFVitFisIlisVitElisVisElisVitIlitFitFVitFitFVosVisElgtFitJVosVisEljsVptF0NYrFaLbONVitFisFVitFitIlisVitElisVitElisVisElisVitElisVosJVisVotFVitFitElisVisJVitFitElisVitElitFgsIlisVitElitFisFVitFitFVosVitIljsVjtF0RYrFaLauNVitFitFVisVotFVitFisElisVitJVitFisElisVitElitFitJVisVisElitFitFVitFitFVosVisIlisVitElisVitElisVisIlitFitFVitFgtElitFisEljsVjtJ0RYrFYrbOQlisVosJVisVitElitFisFVitFitFVitFitIlisVisElisVitElisVitIlitFisFVitFgtElitFitFVosVisIlisVitElisVitElisVosJVitFgtElisVotFVpsVjsJ0RYrFYrbOQlisVitElisVisElitFitJVitFisFVitFitFVosVitIlisVisElisVitElisVitIlitFgsElitFitElisVitElgtFisIlisVitElisVitElisVisIlisVotFVpsVjsF0NaLFYrbOQlisVitIlisVisElisVitElitFgtIlitFitFVosVisElgtFitJVosVisElisVotFVisVitElisVosJVitFitFVitFitFVitFisIlisVitElisVisElisVitIljsVptF0NaLa1s5BWC2tCFaLa1EVitrURWK1tCB5RW1qIrFa2ogsVtaCK0W1qQrFaWoosVtaCKxW1qQrFbWgisVtaiKxWtqQrFbWggteHV3v48e0eXUX5tajE/y66vN5efaePj9f215HoGnbkpuPE3s/Xza1UTQz0cd5cnD8HjX6vL1Ovb2K8f1v5tajzmv/9k=");
+        background-repeat: no-repeat;
+        background-size: 100%;
     }
     .deleteButton{
-        background-color: #a71930;;
+        background-color: #a71930;
+        border-radius:10px;
+    }
+    input{
+        border-radius:10px;
+    }
+    #message{
+        width:55%;
     }
     #messages{
        
-        align-items: center;
-
+        align-items: justify;
+        
         width:85%;
         margin: 2px;
         padding: 0px;
         box-sizing: content-box;
-
-        background-color: #4a708b;
-        border-radius: 2px;
+        
+        border-radius:10px;
         position: relative;
-        color: white;
+        color: #1E2637;
+        
 
         font-size: 16px;
     }
     .chatArea{
-        width: 100%;
+        
         display: flex;
         flex-direction: row;
         justify-content: center;
+        
     }
     form{
         width: 100%;
@@ -40,21 +66,19 @@
     }
     body{
         text-align: center;
+        background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8NDQ0NDw8NDQ4NDQ8NDQ8NDQ8PDQ8NFREWFhURFhUYHCggGBolGxUVITEhJikrLi4uFx8zODMtNygtLisBCgoKDQ0OFQ8QFysZFRkrLSstLSsrLS0tLSstLS0vKy0tKystKzErKy0rOC0rKzItKy0uLSsrKy0tKysrNystK//AABEIANYA7AMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAAAQIDBAYFB//EAD8QAAICAQEDBwYNBAIDAAAAAAABAgMRBAUSIQYTMUFRYXEiMoGRodEVJEJSU1RicnOisbLBFCOTlAfwM3SS/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAECAwT/xAAfEQEBAQEBAAEFAQAAAAAAAAAAAQIREgMEFCExURP/2gAMAwEAAhEDEQA/APjgAMu4AAAAAAAAAAAAAAAAACAACgAAAAAAAAAAAAAAAAAAAAAAAAAAABJFQSAOrwAJJ1fKATgYHTygEkF6eQgkBOIBJBWQAAAAAAAAAAAAAAAAAACQCLIAklInW5lGCcFkiUiddJlXAwZNzGODWeK70ME61MqbowZMEbo6vhjwRumaNbbSSbbeEl0tlWh1PDE0QZGiGi9ZuVAS0QXrncoBJBWOAAKgAAAAAAAAAAABJFgSCyRK6ZgkWSPb5LbFWstbnnmqsOeODk30RyfQfgPSTgq5aerdSwsQSa8GuJm12zl8lSJSO123yGcIu3SOU0uLpm8zx9l9fgzj3BptNNNPDTWGn2GbXWYe1r9FvbK0GqXyLL9NY+52OUP5XpPDwfQ9g6H+q5O6ipLMoTusgvtwamv+958/SM9dZhTAwZEhgdXw9fkbpOd11bfm0Qs1EuzEI8Pa0eEkd5yL0fNbO2nrWuMqbKoP7MYNv2teo4bdL1m4Y2irRnhW5NRinKUnhRisyb7kdBouRmosjv2ShRlZUZJzn6UugvXO4cs0VaPT2xsmzR2KFmGpLMJRzuyX8M85o1K5ayxglog1K46iASQVzAAVAAAAAAAAEgEoy3mJSLpEJF0jNrvmPoPIenc0al12WTk/BPdX6HU1HPclVjRafvi365Nnv1Mxa9Gct6pnh8qeSsNbF21KMNTFdPRG1fNl3957NTNquRm12mXgf8baeyrS6im6udbjqZeTOLTacI58UeZyY5JRe0tXz8N6nS2PmoyXkWOTbh4pRO7hIzxmRtmjCCW6oxS6MKKS9R82/wCS9i1VSo1FNca3bKVdihFJSljMXhdfSfRd80NqaCvU8zzib5m2N0UuuSzwfcB4G0dEtHsGyj5S0u7Pvsm1ve1nA7B5N3a2WV/bpTxK2S4eEV1s+ubQ01eorlVat6E8byy1nDyujwMShGEVCEVGMViMYrCSA8fZew9Poo4qhmWPKslxsl6epdyM9ps2s1LWWVi5c5yx0qt0k5Y8qlqyPh0S9mT520fV9bWpwnB9E4yi/Sj5U444GpXHWWJoozK0UZuV59RQAG3DUQCSCsAAAAAASiCSLAsi9F7hwSjKL4uMoqSZu0PTWcJKdEn1xe/X6nxRmuuY00i8UelLYk2t6qULo9W60maM6pQe7KLi+ySwzFejEfQuTU86PT90MeptHt1SOZ5J2Z0kF82c1+bP8nQVzMV6sxvq1Ri5SajFLLlJpRS7W+oiG2dL9Z03+er3nm7Yn8T1P4Fn7WfNEzGrx6fi+Kbn5r7JDbWl+taX/Yq95lW29J9a0v8AsVe8+L5J3jPuu/2uf6+0/Dmk+taX/Yq95V7b0n1rS/7FXvPjG8RvD3T7XP8AX2iraFNuVXbVa10quyE8epiyR8YjNppptNcU1wafidLsLlZZW41amTsreErHxsh3t/KXtLNOW/p7n8y9dxbI1LJF52JrKaaaymuhrtNayRt52K2XSfLJvLb7W2fTb58H4M+Zs1HPUY5GNmWRjZuPNuMbILMqajz6gQSQacgAFQAAAkgkixKLxKIyRM13y2NLqJ1S3oScX3dD8UdBpdr03pQ1MIp/OazH3xOaRlrjlpLpbSXizFenDvdmaaumG7Xndk99ZeelLofYenXM8rRQ5uuEF8mKibkJmK9MZNrz+Kan8Gz9rPnCZ3+1Z/FdR+DP9rPnuTGo9Hw65KyZNiGjukk1Va01lNVyaa7VwNTJ9P2JZ8U0v/r1fsRJnrXyfPcScfPP6G/6G7/FP3GO3T2QWZ12QTeE5wlFZ9KPqvOmptWyv+nt57HN83Lez4cMd+ejvNf5uU+r1/HzDJGSmSMmOPR7d1yS1zs0zrk8umW6vuNZj/K9B6tkzleRksPUeFf6yOismdI8uv3WptjUc3RbLr3Gl4vgv1OJq0tlnmQlLvS4es7e7ElhpNPqayjwtbttRbjXHexwy+EfQixitCvYlr4ycYLxyylul0tXn2Ssl2Rfu95r6rW2W+dJ4+auEfUaTNx5ttq3V1L/AMdEPGzyn6jTutc3lqK7FGKivYRIobjzaCCSDThQAFQAAAkgkixKMkSKqpTeIxcn3LJv07KtfTuw8Xx9SM13y1Ebuy45vq+9n1cTaq2PH5U2/upI39Joa6pKSy5LrbyYr04evCZnhM0YyM0ZnN6YvtSfxa/8Kf7Tg8nabSn8Xv8Awp/ocRkN5vF8meOuuiklbcklhJWzSS7EsmrkZJxbpt/CN/013+WfvMdursmsTssmk8pTnKSz6Wa+Rkqdi+Rkpk9XYuy3e9+fCqLw8PypP5vchw9vc5MUOuhzfB2y3l9xcF/LPTnMo5JLC4JcEl0JdhilMMrTkcftCG7dYvtv28TqZyOe2rp5u2clCTi8cUs9SLEv6ebIxsyWJrg8rxWDEzcebakiheRQ3Hm2EAGnCgAKgAABJBKIsWjJrra8Hgsn3sxlkzNdcs0WZ6b5QkpJvg89Lwa0WXRivTiuuqsyk10NJoyxmeFsnWY/tyfB+a+/sPXUjFenNTtCX9i78Kf6HHZOr18v7Fv4cv0OREXV5V8nXaDZ9EqapSqg5OuDba4ttI4/J2ezp/2KfwoftRU/bJ8Gab6GHtOW2tpOYulFea/Kh919Xo6Drd887bmm52rKXl15ku1rrX/ewhzjlsnq8n9dzdu435NuF4T6n/HqPJCZeJ13kpmOUjR2brOeqUvlLyZ/eXWbDkZdImUjxLdq2bzxu4zw4dRt7U1O7HdXnS9kTw2yxjVbr2pJ8JQrku9GKeool51Uovtrl/BqMxyZuPNqs1lVb8yz0WRcX61wNaSw8cPQ8oMg3Hn1UAA040ABUAAAJIBBJKIBK6ZrImXTMSZdMzY75rNFnq6HaHRGx9yl7zx0y6Zix6M6dNNKcXF8YyWHx6UzW+C6Po/zz955VGpnDzXw7HxR6FO00/Oi13x4oy7Sys3wXR9H+efvNyvEYqK4KKSS7EjXhqq5dEl6eH6mVPPRxI1yMu8N8xgDVlsyh8eb/NNfyR8F0fR/nn7zYndGPTKK8WjXs2jWujMvBDpyMun0tdWdyO7vYz5Unn1spq9ZGtY6ZdS95oX7SnLhFKK9cjRlLPT0lZt4tda5ycm8tmFslso2ajjrSGyjZLZRs3I8+qgAg1Hn1QAGmAAAAAAAAEggEWLIsmUJRmx1zWVMsmYkyyZmx2zplTL7xhTLJmeO2dsuTLTqJQ8147uo1sk5Jx0m2/8ACVn2f/kw26qc+mTx2LgjXyMk417XyVyVbIbLxm7WbKNkNlWy8c7pLZRsNlWzUjjrQyoBqRx1oIANOVoACoAAAAAAAAAACQQSRZUkplQTjpNMiZO8Y0yUzPHSaZd4bxjyTknG5tfeGSmRknGva+SMlMjJeM3SzZVsrkZLxm6GyADXHO6CCSCuVoACoAAAAAAAAAAAAAAAAEkAi9SCCQs0AAnGvSRkgDi+kkADiegAgrN0AAJ0ABUAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAABQAAAAAAAAAAAAAAAB/9k=");
+        background-size: 50px;
         background-color: #00395d;
     }
 
 </style>
 </head>
-
-
-
 <body>
 
 <script src="/__/firebase/7.14.3/firebase-app.js"></script>
 <script src="/__/firebase/7.14.3/firebase-database.js"></script>
 <header>
-        <h2>Rocket Chat<h2>
-        <button onclick="id=changeUsername(userId)" style="position:absolute;right:0px;top:0px;">Change Username</button>
+    <h2>Rocket Chat<h2>
 </header>
 <script>
 
@@ -93,9 +117,9 @@
 
 
   function sendMessage() {
-  // get message
+  // get message 
   var time= new Date().toLocaleTimeString();
-  time=`<i><span style="font-size:10px;position:absolute;right:0px;">${time}</span></i>`
+  time=`<i><span style="display: inline;font-size:10px;position:absolute;right:0px;">${time}</span></i>`
   message = document.getElementById("message").value + time;
 
   // save in database
@@ -112,7 +136,7 @@
  firebase.database().ref("messages").on("child_added", function (snapshot) {
   var html = "";
   //each message's unique ID
-  html += "<li id='message-" + snapshot.key + "'>";
+  html += "<li id='message-"+ snapshot.key +"'>";
    // show delete button if message is sent by me
   if (snapshot.val().name == myName) {
    html += "<button class='deleteButton' data-id='" + snapshot.key + "' onclick='deleteMessage(this);' style='position:static;'>";
@@ -152,7 +176,7 @@ firebase.database().ref("messages").on("child_removed", function (snapshot) {
 <form onsubmit="return sendMessage();">
  <input id="message" placeholder="Enter message" autocomplete="off">
 
- <input type="submit">
+ <input type="submit" value="Send">
 </form>
 
 
